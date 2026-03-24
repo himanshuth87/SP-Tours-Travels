@@ -244,44 +244,9 @@ Estimated Price: ₹${price}`;
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-cream/20"></div>
         </div>
 
-        <div className="relative z-10 text-center px-6 max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="inline-block px-4 py-1 rounded-full bg-saffron/20 border border-saffron/30 text-saffron font-semibold text-sm mb-6 backdrop-blur-sm">
-              Premium Travel Services in Mumbai
-            </span>
-            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-white font-bold mb-6 leading-tight">
-              Best <span className="italic text-saffron">Tempo Traveller</span> & Ertiga Rental Mumbai
-            </h1>
-            <p className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto font-light">
-              Experience the luxury of seamless travel with SP Tours & Travels. Mumbai's leading choice for premium groups, families, and corporate tours.
-            </p>
-          </motion.div>
-        </div>
 
-        {/* Floating Stats */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-full max-w-5xl px-6 hidden md:grid grid-cols-4 gap-4">
-          {[
-            { label: 'Happy Clients', value: '5000+' },
-            { label: 'Vehicles', value: 'Premium' },
-            { label: 'Service', value: '24/7' },
-            { label: 'Experience', value: '10+ Years' },
-          ].map((stat, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 + i * 0.1 }}
-              className="glass p-4 rounded-2xl text-center"
-            >
-              <div className="text-2xl font-bold text-dark-green">{stat.value}</div>
-              <div className="text-xs uppercase tracking-widest text-slate-500 font-semibold">{stat.label}</div>
-            </motion.div>
-          ))}
-        </div>
+
+
       </section>
 
       {/* Vehicle Showcase */}
