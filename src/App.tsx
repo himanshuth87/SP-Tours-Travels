@@ -5,17 +5,17 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Phone, 
-  MapPin, 
-  Calendar, 
-  Car, 
-  Users, 
-  CheckCircle2, 
-  MessageSquare, 
-  ChevronRight, 
-  Clock, 
-  ShieldCheck, 
+import {
+  Phone,
+  MapPin,
+  Calendar,
+  Car,
+  Users,
+  CheckCircle2,
+  MessageSquare,
+  ChevronRight,
+  Clock,
+  ShieldCheck,
   Star,
   Send,
   X,
@@ -37,7 +37,7 @@ interface BookingData {
 
 // --- Constants ---
 const PRICING = {
-  'Tempo Traveller': 25,
+  'Tempo Traveller': 33,
   'Ertiga': 15,
 };
 
@@ -118,11 +118,11 @@ Estimated Price: ₹${price}`;
   // --- Simple AI Assistant Logic ---
   const processAiInput = () => {
     const input = aiInput.toLowerCase();
-    
+
     // Simple regex/keyword extraction
     const passengersMatch = input.match(/(\d+)\s*(people|person|pax|passengers)/);
     const passengers = passengersMatch ? parseInt(passengersMatch[1]) : 1;
-    
+
     const dateMatch = input.match(/(tomorrow|today|next week|on \d{1,2}(st|nd|rd|th)? \w+)/);
     const date = dateMatch ? dateMatch[0] : 'Not specified';
 
@@ -132,7 +132,7 @@ Estimated Price: ₹${price}`;
     const drop = locationMatch ? locationMatch[2].trim() : '';
 
     const suggestedVehicle: VehicleType = passengers > 4 ? 'Tempo Traveller' : 'Ertiga';
-    
+
     // Mock distance calculation (random between 50-300 for demo)
     const mockDistance = Math.floor(Math.random() * 250) + 50;
     const mockPrice = mockDistance * PRICING[suggestedVehicle];
@@ -149,7 +149,7 @@ Estimated Price: ₹${price}`;
 
     setBooking(aiBooking);
     setShowAiModal(false);
-    
+
     // Scroll to booking form
     document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -160,11 +160,7 @@ Estimated Price: ₹${price}`;
       <nav className="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center glass">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-full border-2 border-maroon overflow-hidden bg-white flex items-center justify-center shadow-md">
-            {/* Logo Emblem Placeholder - Representing the provided image */}
-            <div className="relative w-full h-full flex items-center justify-center">
-              <div className="absolute inset-0 bg-gradient-to-tr from-saffron/20 to-transparent"></div>
-              <Car size={24} className="text-maroon" />
-            </div>
+            <img src="/logo.jpg" alt="SP Tours & Travels" className="w-full h-full object-cover" />
           </div>
           <div className="flex flex-col">
             <span className="font-display text-xl font-bold tracking-tight text-navy leading-none">SP Tours & Travels</span>
@@ -186,15 +182,15 @@ Estimated Price: ₹${price}`;
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1506461883276-594a12b11cf3?auto=format&fit=crop&q=80&w=2000" 
-            alt="Indian Road Trip" 
+          <img
+            src="https://images.unsplash.com/photo-1506461883276-594a12b11cf3?auto=format&fit=crop&q=80&w=2000"
+            alt="Indian Road Trip"
             className="w-full h-full object-cover brightness-50"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-cream/20"></div>
         </div>
-        
+
         <div className="relative z-10 text-center px-6 max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -214,7 +210,7 @@ Estimated Price: ₹${price}`;
               <a href="#booking" className="bg-saffron text-white px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-transform shadow-xl flex items-center justify-center gap-2">
                 Book Now <ChevronRight size={20} />
               </a>
-              <button 
+              <button
                 onClick={() => setShowAiModal(true)}
                 className="glass-dark text-white px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-transform flex items-center justify-center gap-2"
               >
@@ -232,7 +228,7 @@ Estimated Price: ₹${price}`;
             { label: 'Service', value: '24/7' },
             { label: 'Experience', value: '10+ Years' },
           ].map((stat, i) => (
-            <motion.div 
+            <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -255,15 +251,15 @@ Estimated Price: ₹${price}`;
 
         <div className="grid md:grid-cols-2 gap-10">
           {VEHICLES.map((v) => (
-            <motion.div 
+            <motion.div
               key={v.id}
               whileHover={{ y: -10 }}
               className="group relative overflow-hidden rounded-3xl bg-white shadow-2xl border border-slate-100"
             >
               <div className="h-64 overflow-hidden">
-                <img 
-                  src={v.image} 
-                  alt={v.name} 
+                <img
+                  src={v.image}
+                  alt={v.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   referrerPolicy="no-referrer"
                 />
@@ -285,8 +281,8 @@ Estimated Price: ₹${price}`;
                 <p className="text-slate-600 mb-8 leading-relaxed">
                   {v.description}
                 </p>
-                <a 
-                  href="#booking" 
+                <a
+                  href="#booking"
                   onClick={() => setBooking(prev => ({ ...prev, vehicle: v.type }))}
                   className="w-full py-4 rounded-xl border-2 border-navy text-navy font-bold hover:bg-navy hover:text-white transition-all flex items-center justify-center gap-2"
                 >
@@ -302,7 +298,7 @@ Estimated Price: ₹${price}`;
       <section id="why-us" className="py-24 bg-navy text-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-saffron/10 blur-[100px] rounded-full"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-maroon/20 blur-[100px] rounded-full"></div>
-        
+
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -326,9 +322,9 @@ Estimated Price: ₹${price}`;
             </div>
             <div className="relative">
               <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl rotate-3">
-                <img 
-                  src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&q=80&w=1000" 
-                  alt="India Travel" 
+                <img
+                  src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&q=80&w=1000"
+                  alt="India Travel"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
@@ -359,8 +355,8 @@ Estimated Price: ₹${price}`;
                     <label className="text-xs font-bold uppercase tracking-widest text-slate-400">Full Name</label>
                     <div className="relative">
                       <Users className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         name="name"
                         value={booking.name}
                         onChange={handleInputChange}
@@ -374,8 +370,8 @@ Estimated Price: ₹${price}`;
                     <label className="text-xs font-bold uppercase tracking-widest text-slate-400">Phone Number</label>
                     <div className="relative">
                       <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-                      <input 
-                        type="tel" 
+                      <input
+                        type="tel"
                         name="phone"
                         value={booking.phone}
                         onChange={handleInputChange}
@@ -392,8 +388,8 @@ Estimated Price: ₹${price}`;
                     <label className="text-xs font-bold uppercase tracking-widest text-slate-400">Pickup Location</label>
                     <div className="relative">
                       <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-indian-green" size={18} />
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         name="pickup"
                         value={booking.pickup}
                         onChange={handleInputChange}
@@ -407,8 +403,8 @@ Estimated Price: ₹${price}`;
                     <label className="text-xs font-bold uppercase tracking-widest text-slate-400">Drop Location</label>
                     <div className="relative">
                       <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-red-500" size={18} />
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         name="drop"
                         value={booking.drop}
                         onChange={handleInputChange}
@@ -425,8 +421,8 @@ Estimated Price: ₹${price}`;
                     <label className="text-xs font-bold uppercase tracking-widest text-slate-400">Travel Date</label>
                     <div className="relative">
                       <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-                      <input 
-                        type="date" 
+                      <input
+                        type="date"
                         name="date"
                         value={booking.date}
                         onChange={handleInputChange}
@@ -439,7 +435,7 @@ Estimated Price: ₹${price}`;
                     <label className="text-xs font-bold uppercase tracking-widest text-slate-400">Vehicle Type</label>
                     <div className="relative">
                       <Car className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-                      <select 
+                      <select
                         name="vehicle"
                         value={booking.vehicle}
                         onChange={handleInputChange}
@@ -454,8 +450,8 @@ Estimated Price: ₹${price}`;
 
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-slate-400">Estimated Distance (KM)</label>
-                  <input 
-                    type="number" 
+                  <input
+                    type="number"
                     name="distance"
                     value={booking.distance || ''}
                     onChange={handleInputChange}
@@ -465,7 +461,7 @@ Estimated Price: ₹${price}`;
                   />
                 </div>
 
-                <button 
+                <button
                   type="submit"
                   className="w-full bg-navy text-white py-5 rounded-2xl font-bold text-lg hover:bg-maroon transition-all shadow-xl flex items-center justify-center gap-3 group"
                 >
@@ -484,7 +480,7 @@ Estimated Price: ₹${price}`;
                 <h3 className="text-xl font-bold mb-2">Estimated Price</h3>
                 <p className="text-white/60 text-sm">Based on {booking.distance} KM travel</p>
               </div>
-              
+
               <div className="text-5xl font-bold mb-2">
                 ₹{estimatedPrice.toLocaleString()}
               </div>
@@ -501,6 +497,7 @@ Estimated Price: ₹${price}`;
                   <CheckCircle2 size={16} className="text-saffron" />
                   <span>Clean & Sanitized</span>
                 </div>
+
                 <div className="flex items-center gap-3 text-sm">
                   <CheckCircle2 size={16} className="text-saffron" />
                   <span>24/7 Support</span>
@@ -559,8 +556,8 @@ Estimated Price: ₹${price}`;
                 <span className="font-bold">Kurla East, Mumbai</span>
                 <span className="text-sm">Map View (Interactive)</span>
               </div>
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.887143436402!2d72.8804!3d19.06!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDAzJzM2LjAiTiA3MsKwNTInNDkuNCJF!5e0!3m2!1sen!2sin!4v1630000000000!5m2!1sen!2sin" 
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.887143436402!2d72.8804!3d19.06!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDAzJzM2LjAiTiA3MsKwNTInNDkuNCJF!5e0!3m2!1sen!2sin!4v1630000000000!5m2!1sen!2sin"
                 className="w-full h-full border-0 grayscale opacity-80"
                 allowFullScreen
                 loading="lazy"
@@ -576,7 +573,9 @@ Estimated Price: ₹${price}`;
           <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
             <div className="text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
-                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-navy font-bold border-2 border-maroon">SP</div>
+                <div className="w-10 h-10 bg-white rounded-full overflow-hidden border-2 border-maroon flex items-center justify-center">
+                  <img src="/logo.jpg" alt="SP logo" className="w-full h-full object-cover" />
+                </div>
                 <span className="font-display text-2xl font-bold">SP Tours & Travels</span>
               </div>
               <p className="text-white/60 italic">"Desi Rides, Premium Experience"</p>
@@ -606,20 +605,20 @@ Estimated Price: ₹${price}`;
       {/* AI Assistant Modal */}
       <AnimatePresence>
         {showAiModal && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 backdrop-blur-sm"
           >
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               className="glass w-full max-w-lg rounded-[2rem] overflow-hidden shadow-2xl"
             >
               <div className="bg-navy p-8 text-white relative">
-                <button 
+                <button
                   onClick={() => setShowAiModal(false)}
                   className="absolute top-6 right-6 text-white/60 hover:text-white transition-colors"
                 >
@@ -636,14 +635,14 @@ Estimated Price: ₹${price}`;
               <div className="p-8 space-y-6">
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-slate-400">Your Request</label>
-                  <textarea 
+                  <textarea
                     value={aiInput}
                     onChange={(e) => setAiInput(e.target.value)}
                     placeholder="e.g. Kurla to Lonavala tomorrow 5 people"
                     className="w-full h-32 px-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-saffron focus:border-transparent outline-none transition-all resize-none"
                   />
                 </div>
-                <button 
+                <button
                   onClick={processAiInput}
                   className="w-full bg-saffron text-white py-4 rounded-2xl font-bold text-lg hover:bg-orange-600 transition-all shadow-xl flex items-center justify-center gap-2"
                 >
@@ -659,9 +658,9 @@ Estimated Price: ₹${price}`;
       </AnimatePresence>
 
       {/* Floating WhatsApp Button */}
-      <a 
-        href="https://wa.me/919324419295" 
-        target="_blank" 
+      <a
+        href="https://wa.me/919324419295"
+        target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-8 right-8 w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform z-40"
       >
