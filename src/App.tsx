@@ -254,10 +254,10 @@ Estimated Price: ₹${price}`;
               Premium Travel Services in Mumbai
             </span>
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-white font-bold mb-6 leading-tight">
-              Explore India with <span className="italic text-saffron">Comfort</span>
+              Best <span className="italic text-saffron">Tempo Traveller</span> & Ertiga Rental Mumbai
             </h1>
             <p className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto font-light">
-              Experience the luxury of seamless travel with SP Tours & Travels. From family outings to group adventures, we've got you covered.
+              Experience the luxury of seamless travel with SP Tours & Travels. Mumbai's leading choice for premium groups, families, and corporate tours.
             </p>
           </motion.div>
         </div>
