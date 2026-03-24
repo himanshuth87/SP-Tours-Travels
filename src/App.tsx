@@ -19,7 +19,8 @@ import {
   Star,
   Send,
   X,
-  Sparkles
+  Sparkles,
+  Menu
 } from 'lucide-react';
 
 // --- Types ---
@@ -76,6 +77,7 @@ export default function App() {
   const [aiInput, setAiInput] = useState('');
   const [showAiModal, setShowAiModal] = useState(false);
   const [estimatedPrice, setEstimatedPrice] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Update price whenever distance or vehicle changes
   useEffect(() => {
@@ -167,16 +169,67 @@ Estimated Price: ₹${price}`;
             <span className="text-[10px] uppercase tracking-[0.2em] text-maroon font-bold">Explore India With Us</span>
           </div>
         </div>
-        <div className="hidden md:flex gap-8 text-sm font-medium uppercase tracking-widest text-navy">
+
+        {/* Desktop Links */}
+        <div className="hidden lg:flex gap-8 text-sm font-medium uppercase tracking-widest text-navy">
           <a href="#vehicles" className="hover:text-saffron transition-colors">Vehicles</a>
           <a href="#booking" className="hover:text-saffron transition-colors">Book Now</a>
           <a href="#why-us" className="hover:text-saffron transition-colors">About</a>
           <a href="#contact" className="hover:text-saffron transition-colors">Contact</a>
         </div>
-        <a href="tel:+919324419295" className="bg-navy text-white px-5 py-2 rounded-full text-sm font-semibold flex items-center gap-2 hover:bg-maroon transition-all shadow-lg">
-          <Phone size={16} />
-          <span className="hidden sm:inline">+91 93244 19295</span>
-        </a>
+
+        <div className="flex items-center gap-4">
+          <a href="tel:+919324419295" className="bg-navy text-white px-5 py-2 rounded-full text-sm font-semibold flex items-center gap-2 hover:bg-maroon transition-all shadow-lg">
+            <Phone size={16} />
+            <span className="hidden sm:inline">+91 93244 19295</span>
+          </a>
+          
+          {/* Mobile Menu Toggle */}
+          <button 
+            className="lg:hidden p-2 text-navy"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div 
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed inset-0 top-[80px] bg-white z-[60] flex flex-col p-8 gap-6 shadow-2xl lg:hidden"
+            >
+              {[
+                { name: 'Vehicles', href: '#vehicles' },
+                { name: 'Book Now', href: '#booking' },
+                { name: 'About Us', href: '#why-us' },
+                { name: 'Contact', href: '#contact' },
+              ].map((link, i) => (
+                <motion.a 
+                  key={i}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-2xl font-display font-bold text-navy hover:text-saffron border-b border-slate-100 pb-4"
+                >
+                  {link.name}
+                </motion.a>
+              ))}
+              <div className="mt-8">
+                <p className="text-slate-400 text-sm uppercase tracking-widest mb-4">Contact us instantly</p>
+                <a href="https://wa.me/919324419295" className="flex items-center gap-3 text-indian-green font-bold text-lg">
+                   <Phone size={20} /> +91 93244 19295
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero Section */}
@@ -206,17 +259,6 @@ Estimated Price: ₹${price}`;
             <p className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto font-light">
               Experience the luxury of seamless travel with SP Tours & Travels. From family outings to group adventures, we've got you covered.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="#booking" className="bg-saffron text-white px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-transform shadow-xl flex items-center justify-center gap-2">
-                Book Now <ChevronRight size={20} />
-              </a>
-              <button
-                onClick={() => setShowAiModal(true)}
-                className="glass-dark text-white px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-transform flex items-center justify-center gap-2"
-              >
-                <Sparkles size={20} className="text-saffron" /> AI Assistant
-              </button>
-            </div>
           </motion.div>
         </div>
 
